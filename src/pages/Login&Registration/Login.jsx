@@ -31,15 +31,14 @@ const Login = () => {
 
     return (
         <div className="min-h-screen fixed w-full p-4">
-            <div className="bg-base-200 rounded-xl shadow-md px-8 pt-6 pb-8 mb-4 lg:w-96 mx-auto mt-28">
-                <div className='w-full bg-base-200 px-2 rounded-xl'>
+            <div className="bg-base-200 rounded-xl shadow-xl p-5  lg:w-96 mx-auto mt-28">
+                <div className='w-full bg-base-200 px-2 rounded-xl mb-6'>
                     <img className='w-44 my-5 mx-auto ' src={Logo} alt="" />
+                    <div className='border-b-2 border-blue-400'></div>
                 </div>
-                <form className="mb-4" onSubmit={handleLogin}>
+                <form className="mb-10" onSubmit={handleLogin}>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                            Username
-                        </label>
+                        
                         <input
                             className="border hover:shadow transition-all ease-in-out appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="email"
@@ -50,9 +49,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                            Password
-                        </label>
+                        
                         <input
                             className="border hover:shadow transition-all ease-in-out appearance-none  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             id="password"
@@ -65,7 +62,7 @@ const Login = () => {
                     {error && <p className="text-red-500 text-xs italic">{error}</p>}
                     <div className="flex items-center justify-between">
                         <button
-                            className="bg-green-500 hover:bg-green-700 text-white font-bold btn w-full rounded focus:outline-none focus:shadow-outline"
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold btn w-full rounded focus:outline-none focus:shadow-outline"
                             type="submit"
                         >
                             Login
