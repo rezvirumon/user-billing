@@ -5,6 +5,7 @@ import AddCustomer from "../pages/AddCustomer/AddCustomer";
 import Login from "../pages/Login&Registration/Login";
 import Registration from "../pages/Login&Registration/Registration";
 import PrivateRoute from './PrivateRoute';
+import ListCustomers from "../pages/ListCustomers/ListCustomers";
 
 
 
@@ -26,11 +27,15 @@ const router = createBrowserRouter([
             },
             {
                 path: '/registration',
-                element: <Registration></Registration>
+                element: <PrivateRoute><Registration></Registration></PrivateRoute>
             },
             {
                 path: '/addcustomer',
                 element: <PrivateRoute><AddCustomer></AddCustomer></PrivateRoute>
+            },
+            {
+                path: '/listcustomers',
+                element: <PrivateRoute><ListCustomers></ListCustomers></PrivateRoute>
             }
         ]
     },
