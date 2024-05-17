@@ -74,56 +74,65 @@ const CustomerDetails = () => {
     return (
         <div>
             <Link to='/listcustomers' className='btn my-5'>Back To Customer List</Link>
-            <div className='bg-base-100 shadow-xl p-5 flex gap-5'>
-                <div className="max-w-md p-8 sm:flex sm:space-x-6 dark:bg-gray-50 dark:text-gray-800">
+            <div className=''>
+                <div className="flex w-3/6 mx-auto justify-between">
                     <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
                         <img src="https://source.unsplash.com/100x100/?portrait?1" alt="" className="object-cover object-center w-full h-full rounded dark:bg-gray-500" />
+                        <div className="flex flex-col space-y-4">
+                            {editMode ? (
+                                <form onSubmit={handleSubmit}>
+                                    <div>
+                                        <label htmlFor="name" className="block">Name:</label>
+                                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="input input-bordered" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="mobile" className="block">Mobile:</label>
+                                        <input type="text" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} className="input input-bordered" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="area" className="block">Area:</label>
+                                        <input type="text" id="area" name="area" value={formData.area} onChange={handleChange} className="input input-bordered" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email" className="block">Email:</label>
+                                        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="input input-bordered" />
+                                    </div>
+                                    <button type="submit" className="btn mt-3">Update Info</button>
+                                </form>
+                            ) : (
+                                <>
+                                    <div>
+                                        <label htmlFor="name" className="block">Name:</label>
+                                        <span>{customer && customer.name}</span>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="mobile" className="block">Mobile:</label>
+                                        <span>{customer && customer.mobile}</span>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="area" className="block">Area:</label>
+                                        <span>{customer && customer.area}</span>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email" className="block">Email:</label>
+                                        <span>{customer && customer.email}</span>
+                                    </div>
+                                    <button className="btn mt-3" onClick={toggleEditMode}>Edit Info</button>
+                                </>
+                            )}
+
+
+                        </div>
                     </div>
-                    <div className="flex flex-col space-y-4">
-                        {editMode ? (
-                            <form onSubmit={handleSubmit}>
-                                <div>
-                                    <label htmlFor="name" className="block">Name:</label>
-                                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="input input-bordered" />
-                                </div>
-                                <div>
-                                    <label htmlFor="mobile" className="block">Mobile:</label>
-                                    <input type="text" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} className="input input-bordered" />
-                                </div>
-                                <div>
-                                    <label htmlFor="area" className="block">Area:</label>
-                                    <input type="text" id="area" name="area" value={formData.area} onChange={handleChange} className="input input-bordered" />
-                                </div>
-                                <div>
-                                    <label htmlFor="email" className="block">Email:</label>
-                                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="input input-bordered" />
-                                </div>
-                                <button type="submit" className="btn mt-3">Update Info</button>
-                            </form>
-                        ) : (
-                            <>
-                                <div>
-                                    <label htmlFor="name" className="block">Name:</label>
-                                    <span>{customer && customer.name}</span>
-                                </div>
-                                <div>
-                                    <label htmlFor="mobile" className="block">Mobile:</label>
-                                    <span>{customer && customer.mobile}</span>
-                                </div>
-                                <div>
-                                    <label htmlFor="area" className="block">Area:</label>
-                                    <span>{customer && customer.area}</span>
-                                </div>
-                                <div>
-                                    <label htmlFor="email" className="block">Email:</label>
-                                    <span>{customer && customer.email}</span>
-                                </div>
-                                <button className="btn mt-3" onClick={toggleEditMode}>Edit Info</button>
-                            </>
-                        )}
+
+                    <div>
                         <div>
                             <label htmlFor="bill" className="block">Bill:</label>
                             <span>{customer && customer.bill}</span>
+                        </div>
+                        <div>
+                            <label htmlFor="due" className="block">Due:</label>
+                            <span>{customer && customer.due}</span>
                         </div>
                         <div>
                             <label className="block">Payment:</label>
@@ -131,11 +140,6 @@ const CustomerDetails = () => {
                                 <div key={index}>{payment.amount} - {new Date(payment.date).toLocaleDateString()}</div>
                             ))}
                         </div>
-                        <div>
-                            <label htmlFor="due" className="block">Due:</label>
-                            <span>{customer && customer.due}</span>
-                        </div>
-                       
                     </div>
                 </div>
             </div>

@@ -1,13 +1,15 @@
-import  { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PayBill from './PayBill';
+import { Link } from 'react-router-dom';
 
 const Billing = () => {
     const [customers, setCustomers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchCustomers();
-
         const interval = setInterval(fetchCustomers, 60000); // Fetch customers every 1 minute
         return () => clearInterval(interval);
     }, []);
@@ -16,8 +18,10 @@ const Billing = () => {
         try {
             const response = await axios.get('http://localhost:5000/customers');
             setCustomers(response.data);
+            setLoading(false);
         } catch (err) {
-            console.error('Error fetching customers:', err);
+            setError('Error fetching customers');
+            setLoading(false);
         }
     };
 
@@ -27,15 +31,21 @@ const Billing = () => {
             setCustomers(customers.filter(customer => customer._id !== id));
         } catch (err) {
             console.error('Error deleting customer:', err);
+            setError('Error deleting customer');
         }
     };
 
-    // Function to determine payment status based on bill and payment amount
     const getPaymentStatus = (bill, totalPayment) => {
-        if (totalPayment === bill) {
+        const due = bill - totalPayment;
+        if (due === 0) {
             return 'Paid';
-        } else if (totalPayment > bill) {
-            return 'Advanced';
+        } else if (due < 0) {
+            const advancedDue = totalPayment - bill;
+            if (advancedDue === 0) {
+                return 'Paid';
+            } else {
+                return 'Advanced';
+            }
         } else {
             return 'Unpaid';
         }
@@ -44,57 +54,69 @@ const Billing = () => {
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Billing</h1>
-
-            <div>
-                <h2 className="text-xl font-semibold mb-2">Customer List</h2>
-                <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white">
-                        <thead>
-                            <tr>
-                                <th className="py-2 px-4 border-b">Name</th>
-                                <th className="py-2 px-4 border-b">Mobile</th>
-                                <th className="py-2 px-4 border-b">Area</th>
-                                <th className="py-2 px-4 border-b">Email</th>
-                                <th className="py-2 px-4 border-b">Bill</th>
-                                <th className="py-2 px-4 border-b">Pay</th>
-                                <th className="py-2 px-4 border-b">Due</th>
-                                <th className="py-2 px-4 border-b">Last Payment Date</th>
-                                <th className="py-2 px-4 border-b">Payment Status</th> {/* New column */}
-                                <th className="py-2 px-4 border-b">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {customers.map(customer => (
-                                <tr key={customer._id}>
-                                    <td className="py-2 px-4 border-b">{customer.name}</td>
-                                    <td className="py-2 px-4 border-b">{customer.mobile}</td>
-                                    <td className="py-2 px-4 border-b">{customer.area}</td>
-                                    <td className="py-2 px-4 border-b">{customer.email}</td>
-                                    <td className="py-2 px-4 border-b">{customer.bill}</td>
-                                    <td className="py-2 px-4 border-b">
-                                        {customer.payments.reduce((total, payment) => total + payment.amount, 0)}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">{customer.due}</td>
-                                    <td className="py-2 px-4 border-b">{customer.payments.length > 0 ? new Date(customer.payments[customer.payments.length - 1].date).toLocaleDateString() : '-'}</td>
-
-                                    <td className="py-2 px-4 border-b">{getPaymentStatus(customer.bill, customer.payments.reduce((total, payment) => total + payment.amount, 0))}</td> {/* Payment Status */}
-                                    <td className="py-2 px-4 border-b">
-                                        {getPaymentStatus(customer.bill, customer.payments.reduce((total, payment) => total + payment.amount, 0)) === 'Unpaid' && (
-                                            <PayBill customerId={customer._id} fetchCustomers={fetchCustomers} />
-                                        )}
-                                        <button
-                                            onClick={() => handleDelete(customer._id)}
-                                            className="bg-red-500 text-white px-4 py-1 rounded"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+            {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
+            {!loading && !error && (
+                <div>
+                    <h2 className="text-xl font-semibold mb-2">Customer List</h2>
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full bg-white">
+                            <thead>
+                                <tr>
+                                    <th className="py-2 px-4 border-b">Name</th>
+                                    <th className="py-2 px-4 border-b">Mobile</th>
+                                    <th className="py-2 px-4 border-b">Area</th>
+                                    <th className="py-2 px-4 border-b">Email</th>
+                                    <th className="py-2 px-4 border-b">Bill</th>
+                                    <th className="py-2 px-4 border-b">Pay</th>
+                                    <th className="py-2 px-4 border-b">Due</th>
+                                    <th className="py-2 px-4 border-b">Advanced</th>
+                                    <th className="py-2 px-4 border-b">Last Payment Date</th>
+                                    <th className="py-2 px-4 border-b">Payment Status</th>
+                                    <th className="py-2 px-4 border-b">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {customers.map(customer => (
+                                    <tr key={customer._id} className='hover:bg-blue-100'>
+                                        <td className="py-2 px-4 border-b">{customer.name}</td>
+                                        <td className="py-2 px-4 border-b">{customer.mobile}</td>
+                                        <td className="py-2 px-4 border-b">{customer.area}</td>
+                                        <td className="py-2 px-4 border-b">{customer.email}</td>
+                                        <td className="py-2 px-4 border-b">{customer.bill}</td>
+                                        <td className="py-2 px-4 border-b">
+                                            {customer.payments.reduce((total, payment) => total + payment.amount, 0)}
+                                        </td>
+                                        <td className="py-2 px-4 border-b">{customer.due}</td>
+                                        <td className="py-2 px-4 border-b">
+                                            {getPaymentStatus(customer.bill, customer.payments.reduce((total, payment) => total + payment.amount, 0)) === 'Advanced' ?
+                                                customer.payments.reduce((total, payment) => total + payment.amount, 0) - customer.bill :
+                                                customer.due
+                                            }
+                                        </td>
+                                        <td className="py-2 px-4 border-b">{customer.payments.length > 0 ? new Date(customer.payments[customer.payments.length - 1].date).toLocaleDateString() : '-'}</td>
+
+                                        <td className="py-2 px-4 border-b">{getPaymentStatus(customer.bill, customer.payments.reduce((total, payment) => total + payment.amount, 0))}</td>
+                                        <td className="py-2 px-4 border-b flex items-center justify-between">
+                                            {getPaymentStatus(customer.bill, customer.payments.reduce((total, payment) => total + payment.amount, 0)) === 'Unpaid' && (
+                                                <PayBill customerId={customer._id} fetchCustomers={fetchCustomers} />
+                                            )}
+                                            <button
+                                                onClick={() => handleDelete(customer._id)}
+                                                className="bg-red-500 text-white  rounded btn hidden"
+                                            >
+                                                Delete
+                                            </button>
+                                            <Link to={`/customerdetails/${customer._id}`}><button className="btn">Details</button></Link>
+
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
