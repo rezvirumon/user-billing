@@ -9,7 +9,7 @@ const PayBill = ({ customerId, fetchCustomers }) => {
     const handlePaymentSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:5000/billing/${customerId}`, {
+            const response = await axios.put(`https://user-managed-server.vercel.app/billing/${customerId}`, {
                 payment: paymentAmount
             });
             fetchCustomers();

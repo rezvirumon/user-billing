@@ -7,7 +7,7 @@ const AreaFilter = ({ onSelect }) => {
 
     useEffect(() => {
         // Fetch areas from the backend
-        fetch('http://localhost:5000/areas')
+        fetch('https://user-managed-server.vercel.app/areas')
             .then(response => response.json())
             .then(data => {
                 // Check if data is provided and is in the expected format
@@ -21,11 +21,11 @@ const AreaFilter = ({ onSelect }) => {
     }, []);
 
     return (
-        <div>
-            <label>Select Area:</label>
-            <div className='grid'>
+        <div className='lg:flex lg:h-24 lg:relative lg:top-4 items-center'>
+            
+            <div className='grid grid-cols-3 lg:flex lg:gap-5'>
                 {areas.map(area => (
-                    <button className='btn mb-3 w-[150px;]' key={area} onClick={() => onSelect(area)}>{area}</button>
+                    <button className='btn mb-3 w-[100px;]' key={area} onClick={() => onSelect(area)}>{area}</button>
                 ))}
             </div>
         </div>

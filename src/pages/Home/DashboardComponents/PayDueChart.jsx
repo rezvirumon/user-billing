@@ -27,7 +27,7 @@ const PayDueChart = () => {
 
     useEffect(() => {
         // Fetch data from the backend to populate the chart
-        fetch('http://localhost:5000/dashboard/chart-data')
+        fetch('https://user-managed-server.vercel.app/dashboard/chart-data')
             .then(response => response.json())
             .then(data => {
                 // Check if data is provided and is in the expected format

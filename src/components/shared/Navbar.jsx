@@ -55,7 +55,7 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
         setSearchQuery(event.target.value);
         if (event.target.value.length > 2) {
             try {
-                const response = await axios.get(`http://localhost:5000/search?query=${event.target.value}`);
+                const response = await axios.get(`https://user-managed-server.vercel.app/search?query=${event.target.value}`);
                 setSearchResults(response.data);
             } catch (err) {
                 console.error('Error fetching search results:', err);

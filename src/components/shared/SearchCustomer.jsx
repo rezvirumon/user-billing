@@ -8,7 +8,7 @@ const SearchCustomer = ({ setCustomers, setError }) => {
         setSearchQuery(event.target.value);
         if (event.target.value.length > 2) {
             try {
-                const response = await axios.get(`http://localhost:5000/search?query=${event.target.value}`);
+                const response = await axios.get(`https://user-managed-server.vercel.app/search?query=${event.target.value}`);
                 setCustomers(response.data);
             } catch (err) {
                 setError('Error fetching search results');
@@ -20,7 +20,7 @@ const SearchCustomer = ({ setCustomers, setError }) => {
 
     const fetchAllCustomers = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/customers');
+            const response = await axios.get('https://user-managed-server.vercel.app/customers');
             setCustomers(response.data);
         } catch (err) {
             setError('Error fetching customers');

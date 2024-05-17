@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaDesktop, FaMoneyBillAlt, FaUserPlus, FaUsers } from 'react-icons/fa';
+import { FaDesktop, FaLocationArrow, FaMoneyBillAlt, FaUserPlus, FaUsers } from 'react-icons/fa';
 
 
 
@@ -75,7 +75,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                         }}>
                             <span className="flex items-center justify-between">
                                 Area
-                                <FaMoneyBillAlt />
+                                <FaLocationArrow />
                             </span>
                         </NavLink>
                     </li>

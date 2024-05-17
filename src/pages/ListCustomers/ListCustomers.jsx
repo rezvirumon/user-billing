@@ -10,7 +10,7 @@ const ListCustomers = () => {
     // Function to fetch customers
     const fetchCustomers = async () => {
         try {
-            const response = await fetch('http://localhost:5000/customers');
+            const response = await fetch('https://user-managed-server.vercel.app/customers');
             const data = await response.json();
             setCustomers(data);
         } catch (error) {
@@ -25,7 +25,7 @@ const ListCustomers = () => {
     // Function to delete a customer
     const handleDeleteCustomer = async (customerId) => {
         try {
-            const response = await fetch(`http://localhost:5000/customers/${customerId}`, {
+            const response = await fetch(`https://user-managed-server.vercel.app/customers/${customerId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {

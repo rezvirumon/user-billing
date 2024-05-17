@@ -16,7 +16,7 @@ const AddCustomer = () => {
     
         const customer = { name, mobile, area, email, bill }; // Added 'bill' to customer object
         try {
-            const response = await fetch('http://localhost:5000/customers', {
+            const response = await fetch('https://user-managed-server.vercel.app/customers', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import PayBill from './PayBill';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ const Billing = () => {
 
     const fetchCustomers = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/customers');
+            const response = await axios.get('https://user-managed-server.vercel.app/customers');
             setCustomers(response.data);
             setLoading(false);
         } catch (err) {
@@ -28,7 +28,7 @@ const Billing = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/customers/${id}`);
+            await axios.delete(`https://user-managed-server.vercel.app/customers/${id}`);
             setCustomers(customers.filter(customer => customer._id !== id));
         } catch (err) {
             console.error('Error deleting customer:', err);

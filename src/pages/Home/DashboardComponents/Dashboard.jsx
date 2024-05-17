@@ -13,7 +13,7 @@ const Dashboard = () => {
     });
 
     const fetchDashboardData = () => {
-        fetch('http://localhost:5000/dashboard')
+        fetch('https://user-managed-server.vercel.app/dashboard')
             .then(response => response.json())
             .then(data => {
                 setDashboardData(data);
