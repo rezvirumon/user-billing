@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import CustomerModal from '../AddCustomer/AddCustomerModal';
 
+
 const ListCustomers = () => {
     const [customers, setCustomers] = useState([]);
 
@@ -55,6 +56,7 @@ const ListCustomers = () => {
 
     return (
         <div className="">
+           
             <div className="overflow-x-auto">
                 <h3 className="text-center my-10 text-xl font-bold divider">List Customers</h3>
                <div className='my-6'> <CustomerModal></CustomerModal></div>

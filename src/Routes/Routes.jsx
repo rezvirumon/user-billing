@@ -8,6 +8,7 @@ import PrivateRoute from './PrivateRoute';
 import ListCustomers from "../pages/ListCustomers/ListCustomers";
 import CustomerDetails from "../pages/ListCustomers/CustomerDetails";
 import Billing from "../pages/CustomerBilling/Billing";
+import Areas from "../pages/AreaFilter/Areas";
 
 
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: '/billing',
                 element: <PrivateRoute><Billing></Billing></PrivateRoute>
+            },
+            {
+                path: '/area',
+                element: <PrivateRoute><Areas></Areas></PrivateRoute>
             }
         ]
     },
