@@ -1,8 +1,8 @@
-// Navbar.js
 import { useState, useRef, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaAlignLeft, FaAlignRight, FaSignOutAlt, FaUserPlus } from 'react-icons/fa';
 import { AuthContext } from '../../provider/AuthProvider';
+import axios from 'axios';
 import Logo from '../../assets/LogoBGR.png';
 
 const Navbar = ({ toggleSidebar, sidebarOpen }) => {
@@ -10,7 +10,10 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
     const dropdownRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         function handleScroll() {
@@ -48,6 +51,26 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
         }
     };
 
+    const handleSearch = async (event) => {
+        setSearchQuery(event.target.value);
+        if (event.target.value.length > 2) {
+            try {
+                const response = await axios.get(`http://localhost:5000/search?query=${event.target.value}`);
+                setSearchResults(response.data);
+            } catch (err) {
+                console.error('Error fetching search results:', err);
+            }
+        } else {
+            setSearchResults([]);
+        }
+    };
+
+    const handleSelectCustomer = (customerId) => {
+        setSearchQuery('');
+        setSearchResults([]);
+        navigate(`/customerdetails/${customerId}`);
+    };
+
     if (!user) {
         return null; // Render nothing if the user is not logged in
     }
@@ -62,6 +85,28 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
                     <button className="text-xl btn" onClick={toggleSidebar}>
                         {sidebarOpen ? <FaAlignLeft className='text-blue-700' /> : <FaAlignRight />}
                     </button>
+                </div>
+                <div className="relative lg:w-full ml-4">
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={handleSearch}
+                        placeholder="Search by name, mobile, area or email"
+                        className="input input-bordered input-primary w-full max-w-xs"
+                    />
+                    {searchResults.length > 0 && (
+                        <ul className="absolute mt-2 py-2 w-full bg-white rounded-lg shadow-lg z-50">
+                            {searchResults.map((customer) => (
+                                <li
+                                    key={customer._id}
+                                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                                    onClick={() => handleSelectCustomer(customer._id)}
+                                >
+                                    {customer.name} - {customer.email}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
                 <div ref={dropdownRef} className="relative">
                     <summary className="m-1 relative cursor-pointer flex items-center" onClick={() => setDropdownOpen(!dropdownOpen)}>

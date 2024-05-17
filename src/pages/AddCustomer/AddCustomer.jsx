@@ -41,7 +41,7 @@ const AddCustomer = () => {
 
     return (
         <div className="container mx-auto">
-            <div className="p-10 rounded-xl mt-20 mx-auto">
+            <div className="lg:p-10 rounded-xl mt-20 mx-auto">
                 <h3 className="text-center my-10 text-xl font-bold divider">Add Customer</h3>
                 <form className="grid grid-cols-1 mx-auto space-y-3 w-[400px;]">
                     <input

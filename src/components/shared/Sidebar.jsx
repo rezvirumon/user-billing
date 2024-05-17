@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaDesktop, FaUserPlus } from 'react-icons/fa';
+import { FaDesktop, FaMoneyBillAlt, FaUserPlus, FaUsers } from 'react-icons/fa';
 
 
 
@@ -47,7 +47,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                         }}>
                             <span className="flex items-center justify-between">
                                 List User
-                                <FaUserPlus />
+                                <FaUsers />
                             </span>
                         </NavLink>
                     </li>
@@ -61,7 +61,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                         }}>
                             <span className="flex items-center justify-between">
                                 Billing List
-                                <FaUserPlus />
+                                <FaMoneyBillAlt />
                             </span>
                         </NavLink>
                     </li>

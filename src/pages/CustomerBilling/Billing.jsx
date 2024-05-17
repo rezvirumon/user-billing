@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PayBill from './PayBill';
 import { Link } from 'react-router-dom';
+import SearchCustomer from '../../components/shared/SearchCustomer';
 
 const Billing = () => {
     const [customers, setCustomers] = useState([]);
@@ -40,20 +41,20 @@ const Billing = () => {
         if (due === 0) {
             return 'Paid';
         } else if (due < 0) {
-            const advancedDue = totalPayment - bill;
-            if (advancedDue === 0) {
-                return 'Paid';
-            } else {
-                return 'Advanced';
-            }
+            return 'Advanced';
         } else {
             return 'Unpaid';
         }
     };
 
+    const calculateAdvancedAmount = (bill, totalPayment) => {
+        return totalPayment > bill ? totalPayment - bill : 0;
+    };
+
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Billing</h1>
+            <SearchCustomer setCustomers={setCustomers} setError={setError} />
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             {!loading && !error && (
@@ -89,13 +90,9 @@ const Billing = () => {
                                         </td>
                                         <td className="py-2 px-4 border-b">{customer.due}</td>
                                         <td className="py-2 px-4 border-b">
-                                            {getPaymentStatus(customer.bill, customer.payments.reduce((total, payment) => total + payment.amount, 0)) === 'Advanced' ?
-                                                customer.payments.reduce((total, payment) => total + payment.amount, 0) - customer.bill :
-                                                customer.due
-                                            }
+                                            {calculateAdvancedAmount(customer.bill, customer.payments.reduce((total, payment) => total + payment.amount, 0))}
                                         </td>
-                                        <td className="py-2 px-4 border-b">{customer.payments.length > 0 ? new Date(customer.payments[customer.payments.length - 1].date).toLocaleDateString() : '-'}</td>
-
+                                        <td className="py-2 px-4 border-b">{customer.lastPayDate ? new Date(customer.lastPayDate).toLocaleDateString() : '-'}</td>
                                         <td className="py-2 px-4 border-b">{getPaymentStatus(customer.bill, customer.payments.reduce((total, payment) => total + payment.amount, 0))}</td>
                                         <td className="py-2 px-4 border-b flex items-center justify-between">
                                             {getPaymentStatus(customer.bill, customer.payments.reduce((total, payment) => total + payment.amount, 0)) === 'Unpaid' && (
@@ -108,7 +105,6 @@ const Billing = () => {
                                                 Delete
                                             </button>
                                             <Link to={`/customerdetails/${customer._id}`}><button className="btn">Details</button></Link>
-
                                         </td>
                                     </tr>
                                 ))}

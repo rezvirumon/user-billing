@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import CustomerModal from '../AddCustomer/AddCustomerModal';
 
 const ListCustomers = () => {
     const [customers, setCustomers] = useState([]);
@@ -56,9 +57,7 @@ const ListCustomers = () => {
         <div className="">
             <div className="overflow-x-auto">
                 <h3 className="text-center my-10 text-xl font-bold divider">List Customers</h3>
-
-            
-
+               <div className='my-6'> <CustomerModal></CustomerModal></div>
                 <table className="table">
                     <thead>
                         <tr>
@@ -79,7 +78,7 @@ const ListCustomers = () => {
                                 <td>{customer.email}</td>
                                 <td>{customer.area}</td>
                                 <td className="space-x-2">
-                                  <Link to={`/customerdetails/${customer._id}`}><button className="btn">View Details</button></Link>
+                                    <Link to={`/customerdetails/${customer._id}`}><button className="btn">View Details</button></Link>
                                     <button onClick={() => {
                                         Swal.fire({
                                             title: 'Are you sure?',

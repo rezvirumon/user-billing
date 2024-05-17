@@ -39,17 +39,17 @@ const PayBill = ({ customerId, fetchCustomers }) => {
             {showModal && (
                 <dialog id="my_modal_1" className="modal" open>
                     <div className="modal-box">
-                        <h3 className="font-bold text-lg">Pay Bill</h3>
-                        <form onSubmit={handlePaymentSubmit}>
+                        <h3 className="">Pay Bill</h3>
+                        <form onSubmit={handlePaymentSubmit} className='flex flex-col '>
                             <input
                                 type="number"
                                 value={paymentAmount}
                                 onChange={(e) => setPaymentAmount(e.target.value)}
                                 placeholder="Enter payment amount"
                                 required
-                                className="mr-2 appearance-none rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="input input-bordered input-primary my-2"
                             />
-                            <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            <button type="submit" className="btn btn-outline btn-success">
                                 Pay
                             </button>
                         </form>
