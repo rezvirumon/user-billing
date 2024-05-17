@@ -6,6 +6,8 @@ import Login from "../pages/Login&Registration/Login";
 import Registration from "../pages/Login&Registration/Registration";
 import PrivateRoute from './PrivateRoute';
 import ListCustomers from "../pages/ListCustomers/ListCustomers";
+import CustomerDetails from "../pages/ListCustomers/CustomerDetails";
+import Billing from "../pages/CustomerBilling/Billing";
 
 
 
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
             {
                 path: '/listcustomers',
                 element: <PrivateRoute><ListCustomers></ListCustomers></PrivateRoute>
+            },
+            {
+                path: '/customerdetails/:id',
+                element: <PrivateRoute><CustomerDetails></CustomerDetails></PrivateRoute>
+            },
+            {
+                path: '/billing',
+                element: <PrivateRoute><Billing></Billing></PrivateRoute>
             }
         ]
     },

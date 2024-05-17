@@ -1,30 +1,22 @@
 import { useEffect, useState } from 'react';
-import Modal from 'react-modal'; // Import react-modal
-import UpdateCustomer from './UpdateCustomer';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const ListCustomers = () => {
     const [customers, setCustomers] = useState([]);
-    const [selectedCustomer, setSelectedCustomer] = useState(null); // Track selected customer for edit modal
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Function to open modal and set the selected customer
-    const handleOpenModal = (customer) => {
-        setSelectedCustomer(customer);
-        setIsModalOpen(true);
+    // Function to fetch customers
+    const fetchCustomers = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/customers');
+            const data = await response.json();
+            setCustomers(data);
+        } catch (error) {
+            console.error('Error fetching customers:', error);
+        }
     };
 
     useEffect(() => {
-        const fetchCustomers = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/customers');
-                const data = await response.json();
-                setCustomers(data);
-            } catch (error) {
-                console.error('Error fetching customers:', error);
-            }
-        };
-
         fetchCustomers();
     }, []);
 
@@ -61,9 +53,12 @@ const ListCustomers = () => {
     };
 
     return (
-        <div className="container mx-auto">
+        <div className="">
             <div className="overflow-x-auto">
                 <h3 className="text-center my-10 text-xl font-bold divider">List Customers</h3>
+
+            
+
                 <table className="table">
                     <thead>
                         <tr>
@@ -77,14 +72,14 @@ const ListCustomers = () => {
                     </thead>
                     <tbody>
                         {customers.map((customer, index) => (
-                            <tr key={customer._id}>
+                            <tr key={customer._id} className='hover:bg-blue-100'>
                                 <th>{index + 1}</th>
                                 <td>{customer.name}</td>
                                 <td>{customer.mobile}</td>
                                 <td>{customer.email}</td>
                                 <td>{customer.area}</td>
                                 <td className="space-x-2">
-                                    <button className="btn" onClick={() => handleOpenModal(customer)}>Edit</button>
+                                  <Link to={`/customerdetails/${customer._id}`}><button className="btn">View Details</button></Link>
                                     <button onClick={() => {
                                         Swal.fire({
                                             title: 'Are you sure?',
@@ -110,18 +105,6 @@ const ListCustomers = () => {
                         ))}
                     </tbody>
                 </table>
-                <div className=''>
-                    {/* Modal for updating customer */}
-                    <Modal
-                        isOpen={isModalOpen}
-                        onRequestClose={() => setIsModalOpen(false)}
-                        contentLabel="Update Customer"
-                        
-                    >
-                        {selectedCustomer && <UpdateCustomer customer={selectedCustomer} onClose={() => setIsModalOpen(false)} />}
-                        <button className="btn" onClick={() => setIsModalOpen(false)}>Close</button>
-                    </Modal>
-                </div>
             </div>
         </div>
     );

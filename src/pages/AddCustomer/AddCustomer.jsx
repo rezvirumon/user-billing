@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const AddCustomer = () => {
     const [name, setName] = useState('');
     const [mobile, setMobile] = useState('');
     const [area, setArea] = useState('');
     const [email, setEmail] = useState('');
+    const [bill, setBill] = useState(''); // Corrected the state variable name
 
     const handleAddCustomer = async () => {
         // Validate that all required fields are provided
@@ -13,7 +14,7 @@ const AddCustomer = () => {
             return;
         }
     
-        const customer = { name, mobile, area, email };
+        const customer = { name, mobile, area, email, bill }; // Added 'bill' to customer object
         try {
             const response = await fetch('http://localhost:5000/customers', {
                 method: 'POST',
@@ -24,6 +25,12 @@ const AddCustomer = () => {
             });
             if (response.ok) {
                 console.log('Customer added successfully');
+                // Reset form fields after successful submission
+                setName('');
+                setMobile('');
+                setArea('');
+                setEmail('');
+                setBill('');
             } else {
                 console.error('Failed to add customer');
             }
@@ -57,6 +64,13 @@ const AddCustomer = () => {
                         className="input input-bordered input-primary"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="text" // Changed type to "text" for bill input
+                        placeholder="Bill"
+                        className="input input-bordered input-primary"
+                        value={bill} // Changed value to bill state variable
+                        onChange={(e) => setBill(e.target.value)} // Changed handler function to setBill
                     />
                     <select
                         className="select select-primary"

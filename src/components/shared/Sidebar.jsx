@@ -51,6 +51,20 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                             </span>
                         </NavLink>
                     </li>
+                    <li className="ml-3">
+                        <NavLink to="/billing" style={({ isActive, isPending, isTransitioning }) => {
+                            return {
+                                fontWeight: isActive ? "bold" : "",
+                                color: isPending ? "red" : "black",
+                                viewTransitionName: isTransitioning ? "slide" : "",
+                            };
+                        }}>
+                            <span className="flex items-center justify-between">
+                                Billing List
+                                <FaUserPlus />
+                            </span>
+                        </NavLink>
+                    </li>
                 </ul>
 
                

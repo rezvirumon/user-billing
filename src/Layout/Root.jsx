@@ -21,7 +21,7 @@ const Root = () => {
                     <Sidebar isOpen={sidebarOpen} />
                 </div>
             </div>
-            <div className="mt-20">
+            <div className="mt-20 container mx-auto">
                 {/* Outlet */}
                 <Outlet />
                
