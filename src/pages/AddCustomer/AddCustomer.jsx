@@ -78,11 +78,20 @@ const AddCustomer = () => {
                         onChange={(e) => setArea(e.target.value)}
                     >
                         <option disabled value="">Area</option>
-                        <option>Area-1</option>
-                        <option>Area-2</option>
-                        <option>Area-3</option>
-                        <option>Area-4</option>
-                        <option>Area-5</option>
+                        <option>Golapganj</option>
+                        <option>Mahatabpur</option>
+                        <option>Mahatabpur-2</option>
+                        <option>Basudebpur</option>
+                        <option>Basudebpur-2</option>
+                        <option>Koikuri</option>
+                        <option>Koikuri-2</option>
+                        <option>Chilkura</option>
+                        <option>Chilkura-2</option>
+                        <option>Jogodishpur</option>
+                        <option>Adorshogram</option>
+                        <option>Shapla</option>
+                        <option>Dhakaiya Para</option>
+                        <option>Jaliya Para</option>
                     </select>
                     <button className="btn btn-outline btn-primary" onClick={handleAddCustomer}>Add New Customer</button>
                 </form>

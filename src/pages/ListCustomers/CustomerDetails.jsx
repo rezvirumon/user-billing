@@ -29,8 +29,8 @@ const CustomerDetails = () => {
                 area: data.area,
                 email: data.email,
                 bill: data.bill,
-                payment: data.payment, // Set payment from fetched data
-                due: data.bill - data.payment // Calculate due based on bill and payment
+                payment: data.payments.reduce((total, payment) => total + payment.amount, 0),
+                due: data.bill - data.payments.reduce((total, payment) => total + payment.amount, 0)
             });
         } catch (error) {
             console.error('Error fetching customer details:', error);
@@ -134,27 +134,33 @@ const CustomerDetails = () => {
                             <span>{customer && customer.due}</span>
                         </div>
                     </div>
-                    <div className="bg-white rounded-xl shadow-xl p-5">
-                        <label className="block text-gray-700 mb-2 font-bold">Payment History</label>
-                        <div className="">
-                            <table className="lg:w-full text-left">
+                    <div className="lg:flex bg-white rounded-xl gap-6 shadow-xl mb-4 p-4">
+                    <div className="mb-6">
+                        <h3 className="text-xl font-semibold mb-4">Payment History</h3>
+                        {customer && customer.payments.length > 0 ? (
+                            <table className="table table-auto w-full">
                                 <thead>
-                                    <tr className=''>
-                                        <th className="px-4 py-2 border-b">Amount</th>
-                                        <th className="px-4 py-2 border-b">Date</th>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Receiver</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {customer && customer.payments.map((payment, index) => (
-                                        <tr key={index} className='hover:bg-green-300 '>
-                                            <td className="px-4 py-2 border-b">{payment.amount}</td>
-                                            <td className="px-4 py-2 border-b">{new Date(payment.date).toLocaleDateString()}</td>
+                                    {customer.payments.map((payment, index) => (
+                                        <tr key={index}>
+                                            <td>{new Date(payment.date).toLocaleDateString()}</td>
+                                            <td>{payment.amount}</td>
+                                            <td>{payment.receiver}</td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
-                        </div>
+                        ) : (
+                            <p>No payment history available.</p>
+                        )}
                     </div>
+                </div>
                 </div>
             </div>
         </div>
