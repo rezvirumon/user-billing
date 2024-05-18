@@ -56,10 +56,10 @@ const ListCustomers = () => {
 
     return (
         <div className="">
-           
+
+            <div className='m-4'> <CustomerModal></CustomerModal></div>
+            <h3 className="text-center my-10 text-xl font-bold divider">List Customers</h3>
             <div className="overflow-x-auto">
-                <h3 className="text-center my-10 text-xl font-bold divider">List Customers</h3>
-               <div className='my-6'> <CustomerModal></CustomerModal></div>
                 <table className="table">
                     <thead>
                         <tr>
@@ -79,8 +79,8 @@ const ListCustomers = () => {
                                 <td>{customer.mobile}</td>
                                 <td>{customer.email}</td>
                                 <td>{customer.area}</td>
-                                <td className="space-x-2">
-                                    <Link to={`/customerdetails/${customer._id}`}><button className="btn">View Details</button></Link>
+                                <td className="space-x-2 flex items-center">
+                                    <Link to={`/customerdetails/${customer._id}`}><button className="btn">Details</button></Link>
                                     <button onClick={() => {
                                         Swal.fire({
                                             title: 'Are you sure?',

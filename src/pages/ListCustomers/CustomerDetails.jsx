@@ -73,8 +73,8 @@ const CustomerDetails = () => {
 
     return (
         <div className="container mx-auto p-4">
-                        <Link to='/billing' className='btn my-5'>Back To Customer List</Link>
-            <div className="bg-base-200 lg:flex shadow-md rounded p-6 gap-5 items-center">
+                        <Link to='/billing' className='btn my-5 ml-6 btn-outline btn-error'>Back To Billing</Link>
+            <div className="lg:flex p-6 gap-5 items-center">
                 <div className="lg:flex bg-white rounded-xl gap-6 shadow-xl mb-4 p-4">
                     <div className="mb-6 ">
                         <img src="https://source.unsplash.com/100x100/?portrait?1" alt="Customer Avatar" className="object-cover object-center w-48 rounded dark:bg-gray-500" />
@@ -98,7 +98,7 @@ const CustomerDetails = () => {
                                     <label htmlFor="email" className="block text-gray-700">Email:</label>
                                     <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="input input-bordered w-full" />
                                 </div>
-                                <button type="submit" className="btn btn-primary mt-3">Update Info</button>
+                                <button type="submit" className="btn w-full btn-primary btn-outline">Update Info</button>
                             </form>
                         ) : (
                             <>
@@ -118,7 +118,7 @@ const CustomerDetails = () => {
                                     <label className="block text-gray-700">Email:</label>
                                     <span>{customer && customer.email}</span>
                                 </div>
-                                <button className="btn w-48 " onClick={toggleEditMode}>Edit Info</button>
+                                <button className="btn w-48 btn-primary btn-outline" onClick={toggleEditMode}>Edit Info</button>
                             </>
                         )}
                     </div>

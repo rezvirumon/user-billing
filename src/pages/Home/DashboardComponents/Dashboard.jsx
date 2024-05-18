@@ -30,42 +30,42 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className="flex flex-col items-center justify-center p-8 space-y-8">
+        <div className="flex flex-col items-center justify-center pt-10 px-4 lg:pt-20 space-y-8">
             <div className="grid lg:grid-cols-3 gap-5">
-                <div className="cursor-pointer w-96 h-24 pl-4  shadow-xl bg-purple-600">
+                <div className="cursor-pointer lg:w-96 h-24 pl-4  shadow-xl bg-purple-600">
                     <div className="flex items-center justify-between h-full text-white">
                         <h2 className="text-xl font-bold">Total Customers</h2>
-                        <span className="text-5xl font-semibold flex items-center glass p-5 bg-purple-800 justify-end h-full">{dashboardData.totalCustomers}</span>
+                        <span className="text-5xl font-semibold flex items-center glass p-5 ml-4 bg-purple-800 justify-end h-full">{dashboardData.totalCustomers}</span>
                     </div>
                 </div>
-                <div className="cursor-pointer w-96 h-24 pl-4  shadow-xl bg-blue-600">
+                <div className="cursor-pointer lg:w-96 h-24 pl-4  shadow-xl bg-blue-600">
                     <div className="flex items-center justify-between h-full text-white">
                         <h2 className="text-xl font-bold">Total Collections</h2>
-                        <span className="text-5xl font-semibold flex items-center glass p-5 bg-blue-800 justify-end h-full">{dashboardData.totalCollections}</span>
+                        <span className="text-5xl font-semibold flex items-center glass p-5 ml-4 bg-blue-800 justify-end h-full">{dashboardData.totalCollections}</span>
                     </div>
                 </div>
-                <div className="cursor-pointer w-96 h-24 pl-4  shadow-xl bg-green-600">
+                <div className="cursor-pointer lg:w-96 h-24 pl-4  shadow-xl bg-green-600">
                     <div className="flex items-center justify-between h-full text-white">
                         <h2 className="text-xl font-bold">Total Dues</h2>
-                        <span className="text-5xl font-semibold flex items-center glass p-5 bg-green-800 justify-end h-full">{dashboardData.totalDues}</span>
+                        <span className="text-5xl font-semibold flex items-center glass p-5 ml-4 bg-green-800 justify-end h-full">{dashboardData.totalDues}</span>
                     </div>
                 </div>
-                <div className="cursor-pointer w-96 h-24 pl-4  shadow-xl bg-pink-600">
+                <div className="cursor-pointer lg:w-96 h-24 pl-4  shadow-xl bg-pink-600">
                     <div className="flex items-center justify-between h-full text-white">
                         <h2 className="text-xl font-bold">Advanced</h2>
-                        <span className="text-5xl font-semibold flex items-center glass p-5 bg-pink-800 justify-end h-full">{dashboardData.totalAdvanced}</span>
+                        <span className="text-5xl font-semibold flex items-center glass p-5 ml-4 bg-pink-800 justify-end h-full">{dashboardData.totalAdvanced}</span>
                     </div>
                 </div>
-                <div className="cursor-pointer w-96 h-24 pl-4  shadow-xl  bg-yellow-600">
+                <div className="cursor-pointer lg:w-96 h-24 pl-4  shadow-xl  bg-yellow-600">
                     <div className="flex items-center justify-between h-full text-white">
                         <h2 className="text-xl font-bold">Today</h2>
-                        <span className="text-5xl font-semibold flex items-center glass p-5 bg-yellow-800 justify-end h-full">{dashboardData.todaysCollection}</span>
+                        <span className="text-5xl font-semibold flex items-center glass p-5 ml-4 bg-yellow-800 justify-end h-full">{dashboardData.todaysCollection}</span>
                     </div>
                 </div>
-                <div className="cursor-pointer w-96 h-24 pl-4  shadow-xl bg-sky-600">
+                <div className="cursor-pointer lg:w-96 h-24 pl-4  shadow-xl bg-sky-600">
                     <div className="flex items-center justify-between h-full text-white">
                         <h2 className="text-xl font-bold">This Month</h2>
-                        <span className="text-5xl font-semibold flex items-center glass p-5 bg-sky-800 justify-end h-full">{dashboardData.thisMonthsCollection}</span>
+                        <span className="text-5xl font-semibold flex items-center glass p-5 ml-4 bg-sky-800 justify-end h-full">{dashboardData.thisMonthsCollection}</span>
                     </div>
                 </div>
             </div>

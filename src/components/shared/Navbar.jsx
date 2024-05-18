@@ -76,7 +76,7 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
     }
 
     return (
-        <div className={`lg:h-20 w-full flex items-center shadow-xl px-4 fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className={`lg:h-20 bg-base-200 w-full flex items-center shadow-xl px-4 fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="flex justify-between w-full items-center">
                 <div className='flex items-center gap-3'>
                     <Link to='/'>
@@ -119,7 +119,7 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
                         </div>
                     </summary>
                     {dropdownOpen && (
-                        <ul className="absolute right-0 mt-4 py-2 w-72 lg:w-96 bg-base-300 rounded-lg shadow-xl z-50">
+                        <ul className="absolute right-0 mt-4 p-2 w-72 lg:w-96 bg-base-300 rounded-lg shadow-xl z-50">
                             <li className="lg:px-4 py-2 text-center">
                                 <h2 className="text-xl font-semibold font-serif text-purple-600">Welcome! {user.displayName}</h2>
                             </li>

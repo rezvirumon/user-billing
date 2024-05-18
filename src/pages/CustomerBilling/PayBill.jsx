@@ -31,9 +31,9 @@ const PayBill = ({ customerId, fetchCustomers }) => {
     };
 
     return (
-        <div>
+        <div className=''>
             <button className="btn bg-red-600 text-white hover:bg-red-700" onClick={() => setShowModal(true)}>
-                Pay Bill
+                Pay
             </button>
 
             {showModal && (

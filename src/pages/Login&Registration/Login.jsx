@@ -30,9 +30,9 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen fixed w-full p-4">
-            <div className="bg-base-200 rounded-xl shadow-xl p-5  lg:w-96 mx-auto mt-28">
-                <div className='w-full bg-base-200 px-2 rounded-xl mb-6'>
+        <div className="px-3">
+            <div className="bg-base-100 border rounded-xl shadow-xl p-5  lg:w-96 mx-auto mt-28">
+                <div className='w-full px-2 rounded-xl mb-6'>
                     <img className='w-44 my-5 mx-auto ' src={Logo} alt="" />
                     <div className='border-b-2 border-blue-400'></div>
                 </div>
@@ -62,13 +62,16 @@ const Login = () => {
                     {error && <p className="text-red-500 text-xs italic">{error}</p>}
                     <div className="flex items-center justify-between">
                         <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold btn w-full rounded focus:outline-none focus:shadow-outline"
+                            className="btn  btn-primary w-full"
                             type="submit"
                         >
                             Login
                         </button>
                     </div>
                 </form>
+            </div>
+            <div className='text-center mt-20 cursor-pointer font-semibold animate-bounce'>
+                <p className='text-primary'>Powered by RumonNetwork</p>
             </div>
         </div>
     );
