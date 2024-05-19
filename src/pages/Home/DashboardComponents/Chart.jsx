@@ -55,7 +55,7 @@ const Chart = () => {
     }, []);
 
     return (
-        <div>
+        <div className=' mb-5 lg:w-[400px;] rounded-xl p-3'>
             <h2>Collections Chart</h2>
             <Bar data={chartData} />
         </div>

@@ -135,12 +135,12 @@ const CustomerDetails = () => {
                         </div>
                     </div>
                     <div className="lg:flex bg-white rounded-xl gap-6 shadow-xl mb-4 p-4">
-                    <div className="mb-6">
+                    <div className="mb-6 w-full">
                         <h3 className="text-xl font-semibold mb-4">Payment History</h3>
                         {customer && customer.payments.length > 0 ? (
-                            <table className="table table-auto w-full">
+                            <table className="table table-auto w-full text-center">
                                 <thead>
-                                    <tr>
+                                    <tr className='bg-base-200'>
                                         <th>Date</th>
                                         <th>Amount</th>
                                         <th>Receiver</th>
@@ -148,7 +148,7 @@ const CustomerDetails = () => {
                                 </thead>
                                 <tbody>
                                     {customer.payments.map((payment, index) => (
-                                        <tr key={index}>
+                                        <tr key={index} className='hover:bg-base-200'>
                                             <td>{new Date(payment.date).toLocaleDateString()}</td>
                                             <td>{payment.amount}</td>
                                             <td>{payment.receiver}</td>

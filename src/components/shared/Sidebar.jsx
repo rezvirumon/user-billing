@@ -1,10 +1,29 @@
 import { NavLink } from "react-router-dom";
 import { FaDesktop, FaLocationArrow, FaMoneyBillAlt, FaUserPlus, FaUsers } from 'react-icons/fa';
-
-
-
+import { useContext, useEffect } from 'react'; // Import useEffect
+import { AuthContext } from '../../provider/AuthProvider'; // Import AuthContext
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
+    const { user } = useContext(AuthContext); // Get user from AuthContext
+
+    // Check if user is logged in, if not, do not render Sidebar
+    if (!user) {
+        return null;
+    }
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (isOpen && event.target.closest('.w-44') === null) {
+                toggleSidebar(); // Close sidebar if clicked outside
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen, toggleSidebar]);
+
     return (
         <>
             <div className={` bg-base-200 min-h-screen lg:min-h-[830px] w-44 ${isOpen ? 'block' : 'hidden'}`}>
@@ -80,10 +99,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                         </NavLink>
                     </li>
                 </ul>
-
-               
+                {/* <img className="w-16 h-16 rounded-full object-cover" src={user.photoURL} alt="User Avatar" /> */}
             </div>
-
         </>
     );
 };

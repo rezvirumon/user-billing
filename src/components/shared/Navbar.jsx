@@ -95,7 +95,7 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
                         className="input input-bordered input-primary w-full max-w-xs"
                     />
                     {searchResults.length > 0 && (
-                        <ul className="absolute mt-2 py-2 w-full bg-white rounded-lg shadow-lg z-50">
+                        <ul className="absolute mt-2 py-2 bg-white rounded-lg shadow-lg z-50">
                             {searchResults.map((customer) => (
                                 <li
                                     key={customer._id}
@@ -119,7 +119,7 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
                         </div>
                     </summary>
                     {dropdownOpen && (
-                        <ul className="absolute right-0 mt-4 p-2 w-72 lg:w-96 bg-base-300 rounded-lg shadow-xl z-50">
+                        <ul className="absolute right-0 mt-4 p-2 w-72 lg:w-96 bg-white rounded-lg shadow-xl z-50">
                             <li className="lg:px-4 py-2 text-center">
                                 <h2 className="text-xl font-semibold font-serif text-purple-600">Welcome! {user.displayName}</h2>
                             </li>

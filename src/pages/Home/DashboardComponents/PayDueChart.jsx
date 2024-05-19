@@ -67,7 +67,7 @@ const PayDueChart = () => {
     }, []);
 
     return (
-        <div className=''>
+        <div className=' mb-5 lg:w-[400px;] rounded-xl p-3'>
             <h2>Pay and Due Chart</h2>
             <Bar data={chartData} />
         </div>
