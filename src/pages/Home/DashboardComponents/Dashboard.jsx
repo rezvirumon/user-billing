@@ -38,58 +38,58 @@ const Dashboard = () => {
             <h2 className='lg:my-10 text-xl font-bold divider'>Dashboard</h2>
             <div className="">
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <div className="flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-green-500 border-green-300">
-                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-green-400">
-                            <FaUsers />
+                    <div className="group flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-green-500 border-green-300">
+                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-green-400 group-hover:bg-green-500">
+                            <FaUsers className="group-hover:scale-110 transition-transform duration-300" />
                         </div>
                         <div className='text-center'>
-                            <h2 className="text-lg text-gray-500 font-bold">Customers</h2>
-                            <span className="text-5xl font-bold text-green-400">{dashboardData.totalCustomers}</span>
+                            <h2 className="text-lg text-gray-500 font-bold group-hover:text-green-500 transition-colors duration-300">Customers</h2>
+                            <span className="text-5xl font-bold text-green-400 group-hover:text-green-500 transition-colors duration-300">{dashboardData.totalCustomers}</span>
                         </div>
                     </div>
-                    <div className="flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-purple-500 border-purple-300">
-                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-purple-400">
-                            <FaFileInvoiceDollar />
+                    <div className="group flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-purple-500 border-purple-300">
+                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-purple-400 group-hover:bg-purple-500">
+                            <FaFileInvoiceDollar className="group-hover:scale-110 transition-transform duration-300" />
                         </div>
                         <div className='text-center'>
-                            <h2 className="text-lg text-gray-500 font-bold">Collections</h2>
-                            <span className="text-5xl font-bold text-purple-400">{dashboardData.totalCollections}</span>
+                            <h2 className="text-lg text-gray-500 font-bold group-hover:text-purple-500 transition-colors duration-300">Collections</h2>
+                            <span className="text-5xl font-bold text-purple-400 group-hover:text-purple-500 transition-colors duration-300">{dashboardData.totalCollections}</span>
                         </div>
                     </div>
-                    <div className="flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-pink-500 border-pink-300">
-                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-pink-400">
-                            <FaFilterCircleXmark />
+                    <div className="group flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-pink-500 border-pink-300">
+                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-pink-400 group-hover:bg-pink-500">
+                            <FaFilterCircleXmark className="group-hover:scale-110 transition-transform duration-300" />
                         </div>
                         <div className='text-center'>
-                            <h2 className="text-lg text-gray-500 font-bold">Dues</h2>
-                            <span className="text-5xl font-bold text-pink-400">{dashboardData.totalDues}</span>
+                            <h2 className="text-lg text-gray-500 font-bold group-hover:text-pink-500 transition-colors duration-300">Dues</h2>
+                            <span className="text-5xl font-bold text-pink-400 group-hover:text-pink-500 transition-colors duration-300">{dashboardData.totalDues}</span>
                         </div>
                     </div>
-                    <div className="flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-red-500 border-red-300">
-                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-red-400">
-                            <FaSackDollar />
+                    <div className="group flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-red-500 border-red-300">
+                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-red-400 group-hover:bg-red-500">
+                            <FaSackDollar className="group-hover:scale-110 transition-transform duration-300" />
                         </div>
                         <div className='text-center'>
-                            <h2 className="text-lg text-gray-500 font-bold">Advanced</h2>
-                            <span className="text-5xl font-bold text-red-400">{dashboardData.totalAdvanced}</span>
+                            <h2 className="text-lg text-gray-500 font-bold group-hover:text-red-500 transition-colors duration-300">Advanced</h2>
+                            <span className="text-5xl font-bold text-red-400 group-hover:text-red-500 transition-colors duration-300">{dashboardData.totalAdvanced}</span>
                         </div>
                     </div>
-                    <div className="flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-blue-500 border-blue-300">
-                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-blue-400">
-                            <FaCalendarDays />
+                    <div className="group flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-blue-500 border-blue-300">
+                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-blue-400 group-hover:bg-blue-500">
+                            <FaCalendarDays className="group-hover:scale-110 transition-transform duration-300" />
                         </div>
                         <div className='text-center'>
-                            <h2 className="text-lg text-gray-500 font-bold">Today's</h2>
-                            <span className="text-5xl font-bold text-blue-400">{dashboardData.todaysCollection}</span>
+                            <h2 className="text-lg text-gray-500 font-bold group-hover:text-blue-500 transition-colors duration-300">Today's</h2>
+                            <span className="text-5xl font-bold text-blue-400 group-hover:text-blue-500 transition-colors duration-300">{dashboardData.todaysCollection}</span>
                         </div>
                     </div>
-                    <div className="flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-teal-500 border-teal-300">
-                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-teal-400">
-                            <FaCalendarCheck />
+                    <div className="group flex justify-between items-center cursor-pointer w-80 lg:w-96 px-3 py-5 rounded-lg border-b-[7px] transition-all ease-in-out shadow-xl hover:border-teal-500 border-teal-300">
+                        <div className="text-4xl text-white p-5 rounded-lg shadow-xl glass bg-teal-400 group-hover:bg-teal-500">
+                            <FaCalendarCheck className="group-hover:scale-110 transition-transform duration-300" />
                         </div>
                         <div className='text-center'>
-                            <h2 className="text-lg text-gray-500 font-bold">This Month</h2>
-                            <span className="text-5xl font-bold text-teal-400">{dashboardData.thisMonthsCollection}</span>
+                            <h2 className="text-lg text-gray-500 font-bold group-hover:text-teal-500 transition-colors duration-300">This Month</h2>
+                            <span className="text-5xl font-bold text-teal-400 group-hover:text-teal-500 transition-colors duration-300">{dashboardData.thisMonthsCollection}</span>
                         </div>
                     </div>
                 </div>
