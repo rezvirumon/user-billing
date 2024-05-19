@@ -17,7 +17,7 @@ const MonthlyRevenueChart = ({ data }) => {
         };
     }, []);
 
-    const labels = data.map(item => `Month ${item._id}`);
+    const labels = data.map(item => `month ${item._id}`);
     const dataset = data.map(item => item.totalRevenue);
 
     const chartData = {
@@ -34,7 +34,7 @@ const MonthlyRevenueChart = ({ data }) => {
     };
 
     return (
-        <div className="p-5 shadow-xl rounded-xl w-full">
+        <div className="p-5 rounded-xl w-full">
             <h3 className="text-lg font-bold mb-4">Monthly Revenue</h3>
             <Line ref={chartRef} data={chartData} />
         </div>

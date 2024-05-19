@@ -3,14 +3,22 @@ import axios from 'axios';
 import PayBill from './PayBill';
 import { Link } from 'react-router-dom';
 import SearchCustomer from '../../components/shared/SearchCustomer';
+import { FaInfo } from 'react-icons/fa';
 
 const Billing = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [dashboardData, setDashboardData] = useState({
+        totalCustomers: 0,
+        totalCollections: 0,
+        totalDues: 0,
+        totalAdvanced: 0
+    });
 
     useEffect(() => {
         fetchCustomers();
+        fetchDashboardData();
         const interval = setInterval(fetchCustomers, 60000); // Fetch customers every 1 minute
         return () => clearInterval(interval);
     }, []);
@@ -23,6 +31,15 @@ const Billing = () => {
         } catch (err) {
             setError('Error fetching customers');
             setLoading(false);
+        }
+    };
+
+    const fetchDashboardData = async () => {
+        try {
+            const response = await axios.get('https://user-managed-server.vercel.app/dashboard');
+            setDashboardData(response.data);
+        } catch (err) {
+            setError('Error fetching dashboard data');
         }
     };
 
@@ -54,16 +71,19 @@ const Billing = () => {
     return (
         <div className="container mx-auto p-4">
             <h3 className="text-center my-10 text-xl font-bold divider">Customer Billing</h3>
+            <div className='lg:flex gap-2 my-5'>
+                <p className='p-2 shadow-xl glass cursor-pointer'>Total: <span>{dashboardData.totalCustomers}</span></p>
+                <p className='p-2 shadow-xl glass cursor-pointer'>Collection: <span>{dashboardData.totalCollections}TK</span></p>
+                <p className='p-2 shadow-xl glass cursor-pointer'>Due: <span>{dashboardData.totalDues}</span>TK</p>
+                <p className='p-2 shadow-xl glass cursor-pointer'>Advanced: <span>{dashboardData.totalAdvanced}TK</span></p>
+            </div>
             <div className='flex justify-between items-center'>
-                <p className='p-3 bg-sky-500 text-white w-24 text-center rounded-full btn hover:bg-sky-700'>Total: {customers.length}</p>
-
                 <SearchCustomer setCustomers={setCustomers} setError={setError} />
             </div>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             {!loading && !error && (
                 <div>
-
                     <div className="overflow-x-auto">
                         <table className="min-w-full bg-white">
                             <thead className='bg-base-200'>
@@ -76,7 +96,7 @@ const Billing = () => {
                                     <th className="py-2 px-4 border-b">Pay</th>
                                     <th className="py-2 px-4 border-b">Due</th>
                                     <th className="py-2 px-4 border-b">Advanced</th>
-                                    <th className="py-2 border-b">Last Payment Date</th>
+                                    <th className="py-2 px-4 border-b">Last Payment Date</th>
                                     <th className="py-2 px-4 border-b">Payment Status</th>
                                     <th className="py-2 px-4 border-b">Actions</th>
                                 </tr>
@@ -108,7 +128,7 @@ const Billing = () => {
                                             >
                                                 Delete
                                             </button>
-                                            <Link to={`/customerdetails/${customer._id}`}><button className="btn">Details</button></Link>
+                                            <Link to={`/customerdetails/${customer._id}`}><button className="btn bg-purple-400 text-white hover:bg-purple-500">Details <FaInfo /></button></Link>
                                         </td>
                                     </tr>
                                 ))}

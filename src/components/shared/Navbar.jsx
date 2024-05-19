@@ -76,13 +76,13 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
     }
 
     return (
-        <div className={`lg:h-20 bg-base-200 w-full flex items-center shadow-xl px-4 fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className={`bg-white lg:h-20  w-full flex items-center shadow-xl lg:px-4 fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="flex justify-between w-full items-center">
                 <div className='flex items-center gap-3'>
                     <Link to='/'>
-                        <img className='w-32 cursor-pointer' src={Logo} alt="Logo" />
+                        <img className='w-32 cursor-pointer hidden lg:block' src={Logo} alt="Logo" />
                     </Link>
-                    <button className="text-xl btn" onClick={toggleSidebar}>
+                    <button className="text-2xl " onClick={toggleSidebar}>
                         {sidebarOpen ? <FaAlignLeft className='text-blue-700' /> : <FaAlignRight />}
                     </button>
                 </div>
@@ -109,14 +109,18 @@ const Navbar = ({ toggleSidebar, sidebarOpen }) => {
                     )}
                 </div>
                 <div ref={dropdownRef} className="relative">
+                  
                     <summary className="m-1 relative cursor-pointer flex items-center" onClick={() => setDropdownOpen(!dropdownOpen)}>
-                        <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-300">
+                       
+                        <div className="w-12 h-12 rounded-full overflow-hidden ring-4">
                             {user.photoURL ? (
-                                <img className="w-full h-full object-cover" src={user.photoURL} alt="User Avatar" />
+                                <img className="w-full h-full object-cover " src={user.photoURL} alt="User Avatar" />
                             ) : (
-                                <img className="w-full h-full object-cover" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Default Avatar" />
+                                <img className="w-full h-full object-cover" src="http://localhost:5173/src/assets/LogoBGR.png" alt="Default Avatar" />
                             )}
+
                         </div>
+
                     </summary>
                     {dropdownOpen && (
                         <ul className="absolute right-0 mt-4 p-2 w-72 lg:w-96 bg-white rounded-lg shadow-xl z-50">

@@ -2,50 +2,53 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import CustomerModal from '../AddCustomer/AddCustomerModal';
-
+import { FaDeleteLeft } from 'react-icons/fa6';
+import { FaInfo } from 'react-icons/fa';
 
 const ListCustomers = () => {
     const [customers, setCustomers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Function to fetch customers
     const fetchCustomers = async () => {
         try {
             const response = await fetch('https://user-managed-server.vercel.app/customers');
+            if (!response.ok) {
+                throw new Error('Failed to fetch customers');
+            }
             const data = await response.json();
             setCustomers(data);
+            setLoading(false);
         } catch (error) {
-            console.error('Error fetching customers:', error);
+            setError(error.message);
+            setLoading(false);
         }
     };
+    
 
     useEffect(() => {
         fetchCustomers();
     }, []);
 
-    // Function to delete a customer
     const handleDeleteCustomer = async (customerId) => {
         try {
             const response = await fetch(`https://user-managed-server.vercel.app/customers/${customerId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {
-                console.log('Customer deleted successfully');
                 Swal.fire({
                     icon: 'success',
                     title: 'Customer deleted successfully',
                 }).then(() => {
-                    // Fetch updated customer list after successful deletion
                     fetchCustomers();
                 });
             } else {
-                console.error('Failed to delete customer');
                 Swal.fire({
                     icon: 'error',
                     title: 'Failed to delete customer',
                 });
             }
         } catch (error) {
-            console.error('Error:', error);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -54,20 +57,26 @@ const ListCustomers = () => {
         }
     };
 
+
+
+   
+
     return (
         <div className="">
-
-            <div className='m-4'> <CustomerModal></CustomerModal></div>
+            <div className='pt-10'>
+                <CustomerModal />
+            </div>
             <h3 className="text-center my-10 text-xl font-bold divider">List Customers</h3>
             <div className="overflow-x-auto">
                 <table className="table">
-                    <thead>
+                    <thead className='bg-base-300'>
                         <tr>
                             <th>#</th>
                             <th>Customer Name</th>
                             <th>Mobile</th>
                             <th>Email</th>
                             <th>Area</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -79,8 +88,10 @@ const ListCustomers = () => {
                                 <td>{customer.mobile}</td>
                                 <td>{customer.email}</td>
                                 <td>{customer.area}</td>
+                                <td>{customer.status}</td>
+                                
                                 <td className="space-x-2 flex items-center">
-                                    <Link to={`/customerdetails/${customer._id}`}><button className="btn">Details</button></Link>
+                                    <Link to={`/customerdetails/${customer._id}`}><button className="btn bg-purple-400 text-white hover:bg-purple-500">Details <FaInfo/></button></Link>
                                     <button onClick={() => {
                                         Swal.fire({
                                             title: 'Are you sure?',
@@ -100,7 +111,7 @@ const ListCustomers = () => {
                                                 );
                                             }
                                         });
-                                    }} className="btn">Delete</button>
+                                    }} className="btn bg-red-400 text-white hover:bg-red-500">Delete <FaDeleteLeft/></button>
                                 </td>
                             </tr>
                         ))}

@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../provider/AuthProvider'; // Adjust the path based on your project structure
+import { FaDollarSign } from 'react-icons/fa';
 
 const PayBill = ({ customerId, fetchCustomers }) => {
     const { user } = useContext(AuthContext); // Use AuthContext to get the current user
@@ -38,8 +39,8 @@ const PayBill = ({ customerId, fetchCustomers }) => {
 
     return (
         <div>
-            <button className="btn bg-red-600 text-white hover:bg-red-700" onClick={() => setShowModal(true)}>
-                Pay
+            <button className="btn bg-green-400 text-white hover:bg-green-500" onClick={() => setShowModal(true)}>
+                Pay <FaDollarSign />
             </button>
 
             {showModal && (
@@ -64,7 +65,7 @@ const PayBill = ({ customerId, fetchCustomers }) => {
                                 className="input input-bordered input-primary my-2 hidden"
                             />
                             <button type="submit" className="btn btn-outline btn-success">
-                                Pay
+                                Pay Now
                             </button>
                         </form>
                         <button className="btn mt-4" onClick={() => setShowModal(false)}>Close</button>

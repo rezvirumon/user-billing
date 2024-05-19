@@ -14,7 +14,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     useEffect(() => {
         function handleClickOutside(event) {
             if (isOpen && event.target.closest('.w-44') === null) {
-                toggleSidebar(); // Close sidebar if clicked outside
+                toggleSidebar(); 
             }
         }
 
@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
     return (
         <>
-            <div className={` bg-base-200 min-h-screen lg:min-h-[830px] w-44 ${isOpen ? 'block' : 'hidden'}`}>
+            <div className={` bg-white min-h-screen lg:min-h-[830px] w-44 ${isOpen ? 'block' : 'hidden'}`}>
                 <ul className="py-4 space-y-4 w-3/4">
                     <li className="ml-3">
                         <NavLink to="/" style={({ isActive, isPending, isTransitioning }) => {

@@ -26,10 +26,10 @@ const Root = () => {
 
     return (
         <>
-            <div className="relative">
+            <div className="relative ">
                 <Navbar toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
-                <div className="fixed z-50 lg:top-24 top-16">
-                    <div className={`absolute z-10 inset-y-0 left-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-24'} transition-transform duration-300 ease-in-out`}>
+                <div className="fixed z-50 lg:top-[81px] top-[57px]">
+                    <div className={`absolute z-10 inset-y-0 left-0  ${sidebarOpen ? 'translate-x-0' : '-translate-x-24'} transition-transform duration-300 ease-in-out`}>
                         <Sidebar isOpen={sidebarOpen} />
                     </div>
                 </div>

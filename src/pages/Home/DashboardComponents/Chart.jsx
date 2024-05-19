@@ -1,24 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-
-// Register the necessary components
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-);
 
 const Chart = () => {
     const [chartData, setChartData] = useState({ labels: [], datasets: [] });
@@ -44,8 +25,9 @@ const Chart = () => {
                         {
                             label: 'Collections Over Time',
                             data: collections,
-                            borderColor: 'rgba(75,192,192,1)',
-                            backgroundColor: 'rgba(75,192,192,0.2)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
                             fill: true,
                         },
                     ],
@@ -55,7 +37,7 @@ const Chart = () => {
     }, []);
 
     return (
-        <div className=' mb-5 lg:w-[400px;] rounded-xl p-3'>
+        <div className='mb-5 lg:w-400 rounded-xl p-3'>
             <h2>Collections Chart</h2>
             <Bar data={chartData} />
         </div>
