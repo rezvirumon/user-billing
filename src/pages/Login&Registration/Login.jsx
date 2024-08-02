@@ -31,10 +31,10 @@ const Login = () => {
 
     return (
         <div className="px-3">
-            <div className="bg-base-100 border rounded-xl shadow-xl p-5  lg:w-96 mx-auto mt-28">
+            <div className=" border-4 border-purple-500 rounded-xl shadow-xl p-5  lg:w-96 mx-auto mt-28">
                 <div className='w-full px-2 rounded-xl mb-6'>
                     <img className='w-44 my-5 mx-auto ' src={Logo} alt="" />
-                    <div className='border-b-2 border-blue-400'></div>
+                    <div className='border-b-2 border-purple-500'></div>
                 </div>
                 <form className="mb-10" onSubmit={handleLogin}>
                     <div className="mb-4">
@@ -62,7 +62,7 @@ const Login = () => {
                     {error && <p className="text-red-500 text-xs italic">{error}</p>}
                     <div className="flex items-center justify-between">
                         <button
-                            className="btn  btn-primary w-full"
+                            className="btn bg-purple-500 text-white shadow-xl w-full"
                             type="submit"
                         >
                             Login

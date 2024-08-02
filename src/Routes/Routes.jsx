@@ -9,6 +9,7 @@ import ListCustomers from "../pages/ListCustomers/ListCustomers";
 import CustomerDetails from "../pages/ListCustomers/CustomerDetails";
 import Billing from "../pages/CustomerBilling/Billing";
 import Areas from "../pages/AreaFilter/Areas";
+import MonthlyReports from "../pages/Reports/MonthlyReports";
 
 
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path: '/area',
                 element: <PrivateRoute><Areas></Areas></PrivateRoute>
+            },
+            {
+                path: '/reports',
+                element: <PrivateRoute><MonthlyReports></MonthlyReports></PrivateRoute>
             }
         ]
     },

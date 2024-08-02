@@ -128,7 +128,7 @@ const Billing = () => {
                                             >
                                                 Delete
                                             </button>
-                                            <Link to={`/customerdetails/${customer._id}`}><button className="btn bg-purple-400 text-white hover:bg-purple-500">Details <FaInfo /></button></Link>
+                                            <Link to={`/customerdetails/${customer._id}`}><button className="btn w-[100px] bg-purple-400 text-white hover:bg-purple-500">Details <FaInfo /></button></Link>
                                         </td>
                                     </tr>
                                 ))}

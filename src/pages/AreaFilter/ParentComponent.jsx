@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import AreaFilter from './AreaFilter';
 import PayBill from '../CustomerBilling/PayBill'; // Make sure to import the PayBill component
+import { FaInfo } from 'react-icons/fa';
 
 const ParentComponent = () => {
     const [filteredData, setFilteredData] = useState([]);
@@ -123,7 +124,7 @@ const ParentComponent = () => {
                                         >
                                             Delete
                                         </button>
-                                        <Link to={`/customerdetails/${customer._id}`}><button className="btn">Details</button></Link>
+                                        <Link to={`/customerdetails/${customer._id}`}><button className="btn w-[100px] bg-purple-400 text-white hover:bg-purple-500">Details <FaInfo/></button></Link>
                                     </td>
                                 </tr>
                             )

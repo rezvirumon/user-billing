@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { FaCloudUploadAlt, FaDownload, FaEdit } from 'react-icons/fa';
+import { FaCloudUploadAlt, FaDownload, FaEdit, FaPhone, FaEnvelope, FaSms } from 'react-icons/fa';
 import { FaTurnUp } from 'react-icons/fa6';
 
 const CustomerDetails = () => {
@@ -50,13 +50,7 @@ const CustomerDetails = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === "status") {
-            // If the changed field is 'status', update formData directly
-            setFormData({ ...formData, status: value });
-        } else {
-            // For other fields, update formData using spread operator
-            setFormData({ ...formData, [name]: value });
-        }
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = async (e) => {
@@ -126,15 +120,65 @@ const CustomerDetails = () => {
         doc.save('payment_receipt.pdf');
     };
 
+    const handleCall = () => {
+        if (customer && customer.mobile) {
+            window.location.href = `tel:${customer.mobile}`;
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No mobile number available'
+            });
+        }
+    };
+
+    const handleSendEmail = () => {
+        if (customer && customer.email) {
+            const subject = "Payment Receipt";
+            const body = `Dear ${customer.name},\n\nHere is your payment receipt.\n\nBill: ${customer.bill}\nDue: ${customer.due}\n\nThank you,\nRumon Cable TV Network`;
+            window.location.href = `mailto:${customer.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No email address available'
+            });
+        }
+    };
+
+    const handleSendSMS = () => {
+        if (customer && customer.mobile) {
+            const smsBody = `Dear ${customer.name}, your total bill is ${customer.bill} and your due amount is ${customer.due}. Thank you, Rumon Cable TV Network.`;
+            window.location.href = `sms:${customer.mobile}?body=${encodeURIComponent(smsBody)}`;
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No mobile number available'
+            });
+        }
+    };
+
     return (
         <div className="container mx-auto p-4">
-            <Link to='/billing' className='btn my-5 text-white ml-6  bg-red-400 hover:bg-red-500'>Back To Billing <FaTurnUp /></Link>
+            <Link to='/billing' className='btn my-5 text-white ml-6 bg-red-400 hover:bg-red-500'>Back To Billing <FaTurnUp className="inline ml-1" /></Link>
             <div className="lg:flex p-6 gap-5 items-center">
-                <div className="lg:flex bg-white rounded-xl gap-6 shadow-xl mb-4 p-4">
+                <div className="lg:flex bg-white rounded-xl gap-6 shadow-xl mb-4 p-4 w-full lg:w-1/3">
                     <div className="mb-6">
-                        <img src="https://source.unsplash.com/100x100/?portrait?1" alt="Customer Avatar" className="object-cover object-center w-48 rounded dark:bg-gray-500" />
+                        <img src="http://localhost:5173/src/assets/LogoBGR.png" alt="Customer Avatar" className="object-cover object-center w-48 mx-auto rounded-xl border-green-500 p-1 border-4" />
+                        <div className="my-4 space-y-2">
+                            <button className="btn w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-2" onClick={handleCall}>
+                                Call <FaPhone />
+                            </button>
+                            <button className="btn w-full bg-yellow-500 text-white hover:bg-yellow-600 flex items-center justify-center gap-2" onClick={handleSendEmail}>
+                                Send Email <FaEnvelope />
+                            </button>
+                            <button className="btn w-full bg-green-500 text-white hover:bg-green-600 flex items-center justify-center gap-2" onClick={handleSendSMS}>
+                                Send SMS <FaSms />
+                            </button>
+                        </div>
                     </div>
-                    <div className="flex flex-col w-full h-full space-y-4">
+                    <div className="flex flex-col w-full space-y-4">
                         {editMode ? (
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
@@ -160,7 +204,9 @@ const CustomerDetails = () => {
                                         <option value="Inactive">Inactive</option>
                                     </select>
                                 </div>
-                                <button type="submit" className="btn w-full btn-primary btn-outline">Update Info <FaCloudUploadAlt /></button>
+                                <button type="submit" className="btn w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-2">
+                                    Update Info <FaCloudUploadAlt />
+                                </button>
                             </form>
                         ) : (
                             <>
@@ -181,38 +227,42 @@ const CustomerDetails = () => {
                                     <span>{customer && customer.email}</span>
                                 </div>
                                 <div>
-                                    <label htmlFor="status" className="block text-gray-700">Status:</label>
+                                    <label className="block text-gray-700">Status:</label>
                                     <select id="status" name="status" value={formData.status} onChange={handleChange} className="input input-bordered w-full">
                                         <option value="Active">Active</option>
                                         <option value="Inactive">Inactive</option>
                                     </select>
                                 </div>
-                                <button className="btn w-full btn-primary btn-outline" onClick={toggleEditMode}>Edit Info <FaEdit /></button>
+                                <button className="btn w-full bg-yellow-500 text-white hover:bg-yellow-600 flex items-center justify-center gap-2" onClick={toggleEditMode}>
+                                    Edit Info <FaEdit />
+                                </button>
                             </>
                         )}
                     </div>
                 </div>
-                <div className="lg:w-3/6">
-                    <div className="mb-4 bg-white rounded-xl shadow-xl">
-                        <div className="flex gap-5 text-xl border-b-2 p-3">
+                <div className="lg:w-2/3">
+                    <div className="mb-4 bg-white rounded-xl shadow-xl p-4">
+                        <div className="flex gap-5 text-xl border-b-2 pb-3 mb-3">
                             <label className="block text-gray-700">Bill:</label>
                             <span>{customer && customer.bill}</span>
                         </div>
-                        <div className="flex gap-5 text-xl p-3">
+                        <div className="flex gap-5 text-xl">
                             <label className="block text-gray-700">Due:</label>
                             <span>{customer && customer.due}</span>
                         </div>
                     </div>
-                    <div className="lg:flex bg-white rounded-xl gap-6 shadow-xl mb-4 p-4">
-                        <div className="mb-6 w-full">
+                    <div className="bg-white rounded-xl shadow-xl p-4">
+                        <div className="mb-6">
                             <div className='flex items-center justify-between'>
-                                <p className="text-xl font-semibold mb-4 my-10">Payment History</p>
-                                <button className='btn bg-green-200 hover:bg-green-100' onClick={downloadReceipt}>Download <FaDownload/></button>
+                                <p className="text-xl font-semibold mb-4">Payment History</p>
+                                <button className='btn bg-green-200 hover:bg-green-100 flex items-center gap-2' onClick={downloadReceipt}>
+                                    Download <FaDownload />
+                                </button>
                             </div>
                             {customer && customer.payments.length > 0 ? (
                                 <table className="table table-auto w-full text-center">
                                     <thead>
-                                        <tr className='bg-base-200'>
+                                        <tr className='bg-gray-200'>
                                             <th>Date</th>
                                             <th>Amount</th>
                                             <th>Receiver</th>
@@ -220,7 +270,7 @@ const CustomerDetails = () => {
                                     </thead>
                                     <tbody>
                                         {customer.payments.map((payment, index) => (
-                                            <tr key={index} className='hover:bg-base-200'>
+                                            <tr key={index} className='hover:bg-gray-200'>
                                                 <td>{new Date(payment.date).toLocaleDateString()}</td>
                                                 <td>{payment.amount}</td>
                                                 <td>{payment.receiver}</td>
@@ -237,6 +287,6 @@ const CustomerDetails = () => {
             </div>
         </div>
     );
-}
+};
 
 export default CustomerDetails;

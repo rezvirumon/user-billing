@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { FaDesktop, FaLocationArrow, FaMoneyBillAlt, FaUserPlus, FaUsers } from 'react-icons/fa';
 import { useContext, useEffect } from 'react'; // Import useEffect
 import { AuthContext } from '../../provider/AuthProvider'; // Import AuthContext
+import { FaSquarePollVertical } from "react-icons/fa6";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
     const { user } = useContext(AuthContext); // Get user from AuthContext
@@ -14,7 +15,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     useEffect(() => {
         function handleClickOutside(event) {
             if (isOpen && event.target.closest('.w-44') === null) {
-                toggleSidebar(); 
+                toggleSidebar();
             }
         }
 
@@ -26,7 +27,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
     return (
         <>
-            <div className={` bg-white min-h-screen lg:min-h-[830px] w-44 ${isOpen ? 'block' : 'hidden'}`}>
+            <div className={` bg-white border min-h-screen lg:min-h-[830px] w-44 ${isOpen ? 'block' : 'hidden'}`}>
                 <ul className="py-4 space-y-4 w-3/4">
                     <li className="ml-3">
                         <NavLink to="/" style={({ isActive, isPending, isTransitioning }) => {
@@ -98,8 +99,27 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                             </span>
                         </NavLink>
                     </li>
+                    <li className="ml-3">
+                        <NavLink to="/reports" style={({ isActive, isPending, isTransitioning }) => {
+                            return {
+                                fontWeight: isActive ? "bold" : "",
+                                color: isPending ? "red" : "black",
+                                viewTransitionName: isTransitioning ? "slide" : "",
+                            };
+                        }}>
+                            <span className="flex items-center justify-between">
+                                Reports
+                                <FaSquarePollVertical />
+                            </span>
+                        </NavLink>
+                    </li>
                 </ul>
-                {/* <img className="w-16 h-16 rounded-full object-cover" src={user.photoURL} alt="User Avatar" /> */}
+                <div className="relative  h-48 flex flex-col justify-center items-center btn bg-white hover:bg-white">
+                    <h2 className="text-xl font-semibold text-purple-600 mb-5">Profile</h2>
+                    <img className="w-16 h-16 rounded-full object-cover" src={user.photoURL} alt="User Avatar" />
+                    <p>{user.displayName}</p>
+                    {/* <p>{user.email}</p> */}
+                </div>
             </div>
         </>
     );

@@ -39,7 +39,7 @@ const PayBill = ({ customerId, fetchCustomers }) => {
 
     return (
         <div>
-            <button className="btn bg-green-400 text-white hover:bg-green-500" onClick={() => setShowModal(true)}>
+            <button className="btn w-[100px] bg-green-400 text-white hover:bg-green-500" onClick={() => setShowModal(true)}>
                 Pay <FaDollarSign />
             </button>
 
